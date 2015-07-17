@@ -14,7 +14,15 @@ $ gem install amrit
 
 ## Usage
 
-TODO: Write usage instructions here
+```sh
+$ amrit command [arg1] [arg2] ...
+```
+
+For example: when SSH connection is down, `amrit` restarts `ssh` command.
+
+```sh
+$ amrit ssh -N -L3000:localhost:3000 remote-host.example.org
+```
 
 ## Development
 
