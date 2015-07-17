@@ -1,8 +1,10 @@
 # Amrit
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/amrit`. To experiment with that code, run `bin/console` for an interactive prompt.
+> Amrit is repeatedly referred to as the drink of the devas which grants them immortality.
+>
+> from [Wikipedia Amrita](https://en.wikipedia.org/wiki/Amrita#Hinduism)
 
-TODO: Delete this and the text above, and describe your gem
+`amrit.gem` includes `amrit` command to restart given command.
 
 ## Installation
 
