@@ -11,6 +11,7 @@ Gem::Specification.new do |spec|
 
   spec.summary       = %q{amrit.gem includes amrit command to restart given command.}
   spec.homepage      = "https://github.com/nishidayuya/amrit"
+  spec.license       = "X11"
 
   spec.files         = `git ls-files -z`.split("\x0").reject { |f| f.match(%r{^(test|spec|features)/}) }
   spec.bindir        = "exe"
