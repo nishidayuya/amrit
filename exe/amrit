@@ -8,29 +8,33 @@ id: $Id: amrit,v 1.3 2002/12/04 04:05:53 yuya Exp $
 amrit commands
 =end
 
-def main()
-  sleep_time = 1
-  args = ARGV.to_a
-  trap("SIGTERM") {
-    exit(1)
-  }
-  trap("USR1") {
-    STDERR.puts("failed to run: exec(*#{args.inspect})")
-    exit(2)
-  }
-  loop {
-    fork {
-      begin
-        exec(*args)
-      rescue
-        Process::kill("USR1", Process::ppid)
-      end
+module Amrit
+  autoload :VERSION, "amrit/version"
+
+  def self.run(args)
+    sleep_time = 1
+    trap("SIGTERM") {
+      exit(1)
     }
-    pid, status = Process::wait2
-    break if status == 0
-    sleep(sleep_time) if sleep_time > 0
-  }
-  exit(0)
+    trap("USR1") {
+      STDERR.puts("failed to run: exec(*#{args.inspect})")
+      exit(2)
+    }
+    loop {
+      fork {
+        begin
+          exec(*args)
+        rescue
+          Process::kill("USR1", Process::ppid)
+        end
+      }
+      pid, status = Process::wait2
+      break if status == 0
+      sleep(sleep_time) if sleep_time > 0
+    }
+  end
 end
 
-main if $0 == __FILE__
+if $0 == __FILE__
+  Amrit.run(ARGV)
+end
