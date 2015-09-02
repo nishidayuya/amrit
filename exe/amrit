@@ -13,25 +13,24 @@ module Amrit
 
   def self.run(args)
     sleep_time = 1
-    trap("SIGTERM") {
+    trap(:TERM) do
       exit(1)
-    }
-    trap("USR1") {
+    end
+    trap(:USR1) do
       STDERR.puts("failed to run: exec(*#{args.inspect})")
       exit(2)
-    }
-    loop {
-      fork {
+    end
+    loop do
+      fork do
         begin
           exec(*args)
         rescue
-          Process::kill("USR1", Process::ppid)
+          Process.kill(:USR1, Process.ppid)
         end
-      }
-      pid, status = Process::wait2
-      break if status == 0
-      sleep(sleep_time) if sleep_time > 0
-    }
+      end
+      pid, status = *Process.wait2
+      sleep(sleep_time)
+    end
   end
 end
 
