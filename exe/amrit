@@ -34,6 +34,4 @@ module Amrit
   end
 end
 
-if $0 == __FILE__
-  Amrit.run(ARGV)
-end
+Amrit.run(ARGV)
