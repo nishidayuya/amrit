@@ -1,4 +1,4 @@
-# Amrit
+# amrit
 
 > Amrit is repeatedly referred to as the drink of the devas which grants them immortality.
 >
